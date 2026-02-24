@@ -9,13 +9,15 @@ export default function CalculadoraImposto() {
   const formatarInput = (valor) => {
     const numeros = valor.replace(/\D/g, '');
     if (numeros === '') return '';
-    const numero = parseInt(numeros, 10);
-    return numero.toLocaleString('pt-BR');
+    const centavos = parseInt(numeros, 10);
+    const reais = centavos / 100;
+    return reais.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   };
 
   const extrairNumero = (valorFormatado) => {
     const numeros = valorFormatado.replace(/\D/g, '');
-    return numeros === '' ? 0 : parseInt(numeros, 10);
+    if (numeros === '') return 0;
+    return parseInt(numeros, 10) / 100;
   };
 
   const handleFaturamentoChange = (e) => {
