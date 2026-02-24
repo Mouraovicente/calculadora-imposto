@@ -12,8 +12,9 @@ export default function CalculadoraImposto() {
     const LIMITE_ANUAL = 5000000;
 
     // Alíquotas do contador (IRPJ + CSLL + PIS/COFINS)
-    const cargaAtual = atividade === 'servicos' ? 0.1453 : 0.0673;
-    const aumentoEfetivo = atividade === 'servicos' ? 0.01088 : 0.00308;
+    const isServicos = atividade === 'servicos';
+    const cargaAtual = isServicos ? 0.1453 : 0.0673;
+    const aumentoEfetivo = isServicos ? 0.01088 : 0.00308;
 
     const impostoAntigo = valorFaturamento * cargaAtual;
 
@@ -80,7 +81,9 @@ export default function CalculadoraImposto() {
             onChange={(e) => { setAtividade(e.target.value); setMostrarResultado(false); }}
           >
             <option value="servicos">Serviços em Geral (Presunção 32%)</option>
-            <option value="comercio">Comércio / Indústria (Presunção 8%)</option>
+            <option value="comercio">Comércio (Presunção 8%)</option>
+            <option value="industria">Indústria (Presunção 8%)</option>
+            <option value="construcao">Construção (Presunção 8%)</option>
           </select>
         </div>
 
