@@ -104,10 +104,10 @@ export default function CalculadoraImposto() {
             onChange={(e) => { setAtividade(e.target.value); setMostrarResultado(false); }}
           >
             <option value="" disabled>Selecione</option>
-            <option value="servicos">Serviços em Geral (Presunção 32%)</option>
-            <option value="comercio">Comércio (Presunção 8%)</option>
-            <option value="industria">Indústria (Presunção 8%)</option>
-            <option value="construcao">Construção (Presunção 8%)</option>
+            <option value="servicos">Serviços em Geral</option>
+            <option value="comercio">Comércio</option>
+            <option value="industria">Indústria</option>
+            <option value="construcao">Construção</option>
           </select>
         </div>
 
