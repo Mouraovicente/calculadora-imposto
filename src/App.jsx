@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import logoMgl from '/logo-mgl.png';
 
 export default function CalculadoraImposto() {
-  const [atividade, setAtividade] = useState('servicos');
+  const [atividade, setAtividade] = useState('');
   const [faturamento, setFaturamento] = useState('');
   const [mostrarResultado, setMostrarResultado] = useState(false);
 
@@ -52,6 +52,10 @@ export default function CalculadoraImposto() {
   const resultado = calcularImpacto();
 
   const aoClicarCalcular = () => {
+    if (!atividade) {
+      alert('Por favor, selecione o ramo de atuação.');
+      return;
+    }
     const valorFaturamento = extrairNumero(faturamento);
     if (valorFaturamento <= 0) {
       alert('Por favor, insira um valor de faturamento válido.');
@@ -68,7 +72,7 @@ export default function CalculadoraImposto() {
     const texto = encodeURIComponent(
       `Olá! Fiz a simulação no site e vi que meu imposto vai aumentar em ${diferenca} por ano. Gostaria de saber como vocês podem me ajudar com isso.`
     );
-    window.open(`https://wa.me/5511999999999?text=${texto}`, '_blank');
+    window.open(`https://wa.me/553199489118?text=${texto}`, '_blank');
   };
 
   return (
@@ -99,6 +103,7 @@ export default function CalculadoraImposto() {
             value={atividade}
             onChange={(e) => { setAtividade(e.target.value); setMostrarResultado(false); }}
           >
+            <option value="" disabled>Selecione</option>
             <option value="servicos">Serviços em Geral (Presunção 32%)</option>
             <option value="comercio">Comércio (Presunção 8%)</option>
             <option value="industria">Indústria (Presunção 8%)</option>
