@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import logoMgl from '/logo-mgl.png';
 
 export default function CalculadoraImposto() {
   const [atividade, setAtividade] = useState('servicos');
@@ -59,7 +60,7 @@ export default function CalculadoraImposto() {
         style={{ backgroundColor: 'var(--box-bg)', boxShadow: '0 8px 30px rgba(0,0,0,0.08)' }}
       >
         <div className="flex justify-center mb-6">
-          <img src="/logo-mgl.png" alt="MGL" className="h-12 object-contain" />
+          <img src={logoMgl} alt="MGL" className="h-12 object-contain" />
         </div>
         <h2 className="text-center mt-0 mb-2 text-2xl font-extrabold" style={{ color: 'var(--primary-color)' }}>
           Simulador Lucro Presumido 2026
