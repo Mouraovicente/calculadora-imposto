@@ -6,8 +6,26 @@ export default function CalculadoraImposto() {
   const [faturamento, setFaturamento] = useState('');
   const [mostrarResultado, setMostrarResultado] = useState(false);
 
+  const formatarInput = (valor) => {
+    const numeros = valor.replace(/\D/g, '');
+    if (numeros === '') return '';
+    const numero = parseInt(numeros, 10);
+    return numero.toLocaleString('pt-BR');
+  };
+
+  const extrairNumero = (valorFormatado) => {
+    const numeros = valorFormatado.replace(/\D/g, '');
+    return numeros === '' ? 0 : parseInt(numeros, 10);
+  };
+
+  const handleFaturamentoChange = (e) => {
+    const formatado = formatarInput(e.target.value);
+    setFaturamento(formatado);
+    setMostrarResultado(false);
+  };
+
   const calcularImpacto = () => {
-    const valorFaturamento = parseFloat(faturamento) || 0;
+    const valorFaturamento = extrairNumero(faturamento);
     if (valorFaturamento === 0) return null;
 
     const LIMITE_ANUAL = 5000000;
@@ -34,7 +52,7 @@ export default function CalculadoraImposto() {
   const resultado = calcularImpacto();
 
   const aoClicarCalcular = () => {
-    const valorFaturamento = parseFloat(faturamento) || 0;
+    const valorFaturamento = extrairNumero(faturamento);
     if (valorFaturamento <= 0) {
       alert('Por favor, insira um valor de faturamento válido.');
       return;
@@ -93,14 +111,13 @@ export default function CalculadoraImposto() {
             Faturamento Anual Estimado (R$)
           </label>
           <input
-            type="number"
+            type="text"
             id="faturamento"
-            placeholder="Ex: R$ 8.000.000,00"
-            min={0}
-            step={1000}
+            placeholder="Ex: 5.000.000"
+            inputMode="numeric"
             className="input-simulador"
             value={faturamento}
-            onChange={(e) => { setFaturamento(e.target.value); setMostrarResultado(false); }}
+            onChange={handleFaturamentoChange}
           />
         </div>
 
