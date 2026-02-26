@@ -33,9 +33,9 @@ export default function CalculadoraImposto() {
     const LIMITE_ANUAL = 5000000;
 
     // Alíquotas do contador (IRPJ + CSLL + PIS/COFINS)
-    const isServicos = atividade === 'servicos';
-    const cargaAtual = isServicos ? 0.1453 : 0.0673;
-    const aumentoEfetivo = isServicos ? 0.01088 : 0.00308;
+    const isBase32 = atividade === 'servicos' || atividade === 'construcao_32';
+    const cargaAtual = isBase32 ? 0.1453 : 0.0673;
+    const aumentoEfetivo = isBase32 ? 0.01088 : 0.00308;
 
     const impostoAntigo = valorFaturamento * cargaAtual;
 
@@ -109,7 +109,8 @@ export default function CalculadoraImposto() {
             <option value="servicos">Serviços em Geral</option>
             <option value="comercio">Comércio</option>
             <option value="industria">Indústria</option>
-            <option value="construcao">Construção</option>
+            <option value="construcao_8_12">Construção (Presunção 8%/12%)</option>
+            <option value="construcao_32">Construção (Presunção 32%)</option>
           </select>
         </div>
 
@@ -153,7 +154,7 @@ export default function CalculadoraImposto() {
             {resultado.diferenca > 0 && (
               <>
                 <p className="resultado-texto">
-                  Muitas empresas estão conseguindo suspender este aumento na justiça.
+                  Já existe liminar favorável contra este tema. Estamos à disposição para ingressar com a ação caso seja vantajoso para sua empresa.
                 </p>
                 <button type="button" onClick={falarComEspecialista} className="btn-whatsapp">
                   Falar com Especialista
